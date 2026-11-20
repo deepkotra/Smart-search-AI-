@@ -1,0 +1,241 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Smart Search AI</title>
+
+<style>
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: Arial, sans-serif;
+  background: #0b1020;
+  color: white;
+  min-height: 100vh;
+}
+
+header {
+  padding: 20px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.logo {
+  font-size: 23px;
+  font-weight: bold;
+  color: #65a5ff;
+}
+
+.logo span {
+  color: white;
+}
+
+main {
+  max-width: 700px;
+  margin: 90px auto 30px;
+  padding: 20px;
+  text-align: center;
+}
+
+h1 {
+  font-size: 38px;
+  margin-bottom: 15px;
+}
+
+h1 span {
+  color: #69a5ff;
+}
+
+.subtitle {
+  color: #aab3c5;
+  margin-bottom: 35px;
+  font-size: 16px;
+}
+
+.search-box {
+  display: flex;
+  background: #171f33;
+  border: 1px solid #34415c;
+  border-radius: 18px;
+  padding: 8px;
+  gap: 8px;
+}
+
+.search-box input {
+  flex: 1;
+  min-width: 0;
+  background: transparent;
+  border: none;
+  outline: none;
+  color: white;
+  padding: 14px;
+  font-size: 16px;
+}
+
+.search-box button {
+  background: #3979f6;
+  color: white;
+  border: none;
+  border-radius: 12px;
+  padding: 14px 20px;
+  font-size: 16px;
+  cursor: pointer;
+}
+
+.search-box button:hover {
+  background: #5590ff;
+}
+
+.quick {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 10px;
+  margin-top: 25px;
+}
+
+.quick button {
+  background: #171f33;
+  color: #d8e2f5;
+  border: 1px solid #34415c;
+  padding: 10px 15px;
+  border-radius: 20px;
+  cursor: pointer;
+}
+
+.result {
+  display: none;
+  margin-top: 30px;
+  background: #171f33;
+  padding: 20px;
+  border-radius: 15px;
+  text-align: left;
+  border: 1px solid #34415c;
+}
+
+.result h3 {
+  color: #69a5ff;
+  margin-bottom: 12px;
+}
+
+.result p {
+  color: #c6cede;
+  line-height: 1.6;
+}
+
+footer {
+  text-align: center;
+  padding: 30px 15px;
+  color: #818da5;
+  font-size: 13px;
+}
+
+@media(max-width:600px) {
+  main {
+    margin-top: 55px;
+  }
+
+  h1 {
+    font-size: 30px;
+  }
+
+  .search-box button {
+    padding: 12px;
+  }
+}
+</style>
+</head>
+
+<body>
+
+<header>
+  <div class="logo">Smart <span>Search AI</span> 🤖</div>
+</header>
+
+<main>
+
+<h1>Search <span>Anything</span></h1>
+
+<p class="subtitle">
+Your smart search experience starts here.
+</p>
+
+<div class="search-box">
+  <input
+    id="searchInput"
+    type="text"
+    placeholder="Ask anything or search..."
+  >
+
+  <button onclick="searchNow()">Search 🔎</button>
+</div>
+
+<div class="quick">
+  <button onclick="quickSearch('Technology')">Technology</button>
+  <button onclick="quickSearch('Education')">Education</button>
+  <button onclick="quickSearch('News')">News</button>
+  <button onclick="quickSearch('Science')">Science</button>
+</div>
+
+<div class="result" id="result">
+  <h3>Smart Search</h3>
+  <p id="message"></p>
+</div>
+
+</main>
+
+<footer>
+  Smart Search AI • Your search assistant
+</footer>
+
+<script>
+
+function searchNow() {
+
+  const input = document.getElementById("searchInput");
+  const query = input.value.trim();
+
+  if (query === "") {
+    alert("Please type something to search!");
+    return;
+  }
+
+  document.getElementById("result").style.display = "block";
+
+  document.getElementById("message").innerText =
+    "Searching for: " + query +
+    ". Opening search results...";
+
+  const url =
+    "https://www.google.com/search?q=" +
+    encodeURIComponent(query);
+
+  setTimeout(function() {
+    window.open(url, "_blank");
+  }, 500);
+}
+
+function quickSearch(topic) {
+  document.getElementById("searchInput").value = topic;
+  searchNow();
+}
+
+document.getElementById("searchInput")
+.addEventListener("keydown", function(event) {
+
+  if (event.key === "Enter") {
+    searchNow();
+  }
+
+});
+
+</script>
+
+</body>
+</html>
